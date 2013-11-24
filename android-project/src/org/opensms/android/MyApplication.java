@@ -1,8 +1,8 @@
 package org.opensms.android;
 
-import android.app.Application;
 import android.graphics.Bitmap.CompressFormat;
 
+import com.activeandroid.app.Application;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

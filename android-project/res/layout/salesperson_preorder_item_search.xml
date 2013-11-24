@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/salesperson_item_search_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_background_rounded"
+        android:hint="rounded"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:singleLine="true" >
+
+        <requestFocus />
+    </EditText>
+
+    <ListView
+        android:id="@+id/salesperson_item_search_item_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>

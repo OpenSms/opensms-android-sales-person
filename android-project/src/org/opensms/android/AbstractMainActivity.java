@@ -1,23 +1,40 @@
 package org.opensms.android;
 
+import org.opensms.android.fragment.FragmentAccess;
+import org.opensms.android.fragment.adapter.CustomerFragmentPager;
+import org.opensms.android.fragment.adapter.ItemFragmentPager;
+import org.opensms.android.fragment.adapter.SalesPersonsFragmentPager;
 
-
+import android.app.SearchManager;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.os.Handler;
+import android.provider.BaseColumns;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.CursorAdapter;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.widget.SearchView;
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 import com.darvds.ribbonmenu.RibbonMenuView;
 import com.darvds.ribbonmenu.iRibbonMenuCallback;
 
 public class AbstractMainActivity extends SherlockFragmentActivity implements
-		iRibbonMenuCallback {
+		iRibbonMenuCallback{
+	
+	
+	private static AbstractMainActivity activity;
 	/** Called when the activity is first created. */
 
 	private RibbonMenuView rbmView;
@@ -26,17 +43,14 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 
 	private ViewPager pager;
 
-	private MyPagerAdapter adapter;
-	
-	private final String[] TITLES ;
-	
-	
-	
-	
+	private FragmentPagerAdapter adapter;
 
-	public AbstractMainActivity(String[] tITLES) {
-		TITLES = tITLES;
-	}
+
+	
+	
+	
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +63,10 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 		rbmView.setMenuClickCallback(this);
 		rbmView.setMenuItems(R.menu.ribbon_menu);
 
-		
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 
 		pager = (ViewPager) findViewById(R.id.pager);
-		adapter = new MyPagerAdapter(getSupportFragmentManager());
+		adapter = new SalesPersonsFragmentPager(getSupportFragmentManager());
 
 		pager.setAdapter(adapter);
 
@@ -66,76 +79,75 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 
 		getSupportActionBar().setHomeButtonEnabled(true);
 		
-		
-		
-		
+		if(activity==null){
+			activity=AbstractMainActivity.this;
+		}
 
 	}
+
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Used to put dark icons on light action bar
-		// boolean isLight = SampleList.THEME == R.style.Theme_Sherlock_Light;
-
-		MenuItem item = menu.add("Save");
-		item.setIcon(R.drawable.ic_launcher);
-		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-
-		
-
-		return true;
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == android.R.id.home) {
-			
-			TITLES[1]="ABS";
-			
-			adapter = new MyPagerAdapter(getSupportFragmentManager());
-
-			
-			pager.setAdapter(adapter);
-			
-			pager.refreshDrawableState();
-			
 			rbmView.toggleMenu();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	public class MyPagerAdapter extends FragmentPagerAdapter {
+	private Handler handler = new Handler();
 
-	
-
-		public MyPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return TITLES[position];
-		}
-
-		@Override
-		public int getCount() {
-			return TITLES.length;
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			
-			return CardFragmentGenerator.newInstance(position);
-		}
-
-	}
-
+	/**
+	 * Ribbon menu item click listner
+	 * 
+	 */
 	@Override
 	public void RibbonMenuItemClick(int itemId) {
-		// TODO Auto-generated method stub
+
+		// FragmentPagerAdapter pagerAdapter = null;
+
+		switch (itemId) {
+		case R.id.ribbon_menu_home:
+
+		{
+
+			adapter = new SalesPersonsFragmentPager(getSupportFragmentManager());
+		}
+
+			break;
+		case R.id.ribbon_menu_home2:
+
+		{
+			adapter = new CustomerFragmentPager(getSupportFragmentManager());
+		}
+
+			break;
+
+		case R.id.ribbon_menu_home3:
+
+		{
+			adapter = new ItemFragmentPager(getSupportFragmentManager());
+		}
+
+			break;
+
+		default:
+			break;
+		}
+
+		handler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				// adapter = pagerAdapter;
+				pager.setAdapter(adapter);
+				tabs.setViewPager(pager);
+
+			}
+		});
 
 	}
+
+	
 
 }

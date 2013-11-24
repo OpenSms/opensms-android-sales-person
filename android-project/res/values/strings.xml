@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Feeder</string>
+    <string name="app_name">Open-sms Android</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    
+    <!-- Ribbon menu strings -->
+    <string name="ribbon_menu_home">Home</string>
+    <string name="ribbon_menu_customer">Customer</string>
+    <string name="ribbon_menu_item">Item</string>
+    <string name="salesperson_string_fr_dashboard">Dashboard</string>
+    <string name="salesperson_string_fr_todolist">ToDoList</string>
+    <string name="salesperson_string_layout_preorder_additem">New Item</string>
 
 </resources>
