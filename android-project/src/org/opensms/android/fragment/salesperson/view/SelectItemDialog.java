@@ -22,6 +22,8 @@ public class SelectItemDialog extends Dialog{
 	private TextView tvSuggestion;
 	private ArrayAdapter<String> adapter;
 
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

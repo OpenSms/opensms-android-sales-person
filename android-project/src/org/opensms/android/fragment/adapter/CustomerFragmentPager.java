@@ -9,7 +9,6 @@ public class CustomerFragmentPager extends AbstractFragmentPager {
 	public CustomerFragmentPager(FragmentManager fm) {
 		super(fm);
 		getFragments().add(new DashBoard());
-
 	}
 
 }

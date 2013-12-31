@@ -4,6 +4,7 @@ import org.opensms.android.AbstractMainActivity;
 import org.opensms.android.R;
 import org.opensms.android.fragment.FragmentAccess;
 import org.opensms.android.fragment.ViewHolder;
+import org.opensms.util.TemplateProvider;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -34,6 +35,8 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 	public OpenSmsActivity() {
 		super();
 		// ViewHolder.getViewHolder().setAccess(this);
+		
+		
 	}
 
 	Handler handler = new Handler();
@@ -49,6 +52,11 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewHolder.getViewHolder().setAccess(this);
+		
+		TemplateProvider provider=new TemplateProvider();
+		provider.connect(getString(R.string.server_url));
+		
+		
 	}
 
 	@Override

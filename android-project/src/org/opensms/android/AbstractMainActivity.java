@@ -1,31 +1,18 @@
 package org.opensms.android;
 
-import org.opensms.android.fragment.FragmentAccess;
 import org.opensms.android.fragment.adapter.CustomerFragmentPager;
 import org.opensms.android.fragment.adapter.ItemFragmentPager;
 import org.opensms.android.fragment.adapter.SalesPersonsFragmentPager;
 
-import android.app.SearchManager;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.BaseColumns;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.CursorAdapter;
+import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
 import com.astuetz.viewpager.extensions.PagerSlidingTabStrip;
 import com.darvds.ribbonmenu.RibbonMenuView;
 import com.darvds.ribbonmenu.iRibbonMenuCallback;
@@ -36,21 +23,11 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 	
 	private static AbstractMainActivity activity;
 	/** Called when the activity is first created. */
-
 	private RibbonMenuView rbmView;
-
 	private PagerSlidingTabStrip tabs;
-
 	private ViewPager pager;
-
 	private FragmentPagerAdapter adapter;
 
-
-	
-	
-	
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +44,6 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 
 		pager = (ViewPager) findViewById(R.id.pager);
 		adapter = new SalesPersonsFragmentPager(getSupportFragmentManager());
-
 		pager.setAdapter(adapter);
 
 		final int pageMargin = (int) TypedValue.applyDimension(
@@ -103,22 +79,25 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 	 */
 	@Override
 	public void RibbonMenuItemClick(int itemId) {
+		Log.i("Working 82", itemId+"");
 
-		// FragmentPagerAdapter pagerAdapter = null;
+		FragmentPagerAdapter pagerAdapter = null;
 
 		switch (itemId) {
 		case R.id.ribbon_menu_home:
 
 		{
 
-			adapter = new SalesPersonsFragmentPager(getSupportFragmentManager());
+			pagerAdapter = new SalesPersonsFragmentPager(getSupportFragmentManager());
+			
 		}
 
 			break;
 		case R.id.ribbon_menu_home2:
 
 		{
-			adapter = new CustomerFragmentPager(getSupportFragmentManager());
+			pagerAdapter = new CustomerFragmentPager(getSupportFragmentManager());
+			
 		}
 
 			break;
@@ -126,7 +105,7 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 		case R.id.ribbon_menu_home3:
 
 		{
-			adapter = new ItemFragmentPager(getSupportFragmentManager());
+			pagerAdapter = new ItemFragmentPager(getSupportFragmentManager());
 		}
 
 			break;
@@ -135,17 +114,25 @@ public class AbstractMainActivity extends SherlockFragmentActivity implements
 			break;
 		}
 
+		updatePager(pagerAdapter);
+		
+
+	}
+	
+	private void updatePager(final FragmentPagerAdapter adapter){
+		this.adapter=adapter;
+		this.adapter.notifyDataSetChanged();
 		handler.post(new Runnable() {
 
 			@Override
 			public void run() {
-				// adapter = pagerAdapter;
-				pager.setAdapter(adapter);
+				
+				pager.setAdapter(AbstractMainActivity.this.adapter);
+			
 				tabs.setViewPager(pager);
 
 			}
 		});
-
 	}
 
 	

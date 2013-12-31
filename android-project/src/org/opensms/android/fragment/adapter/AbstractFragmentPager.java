@@ -8,24 +8,25 @@ import org.opensms.android.fragment.AbstractPageFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 public abstract class AbstractFragmentPager extends FragmentPagerAdapter {
-	
-	private static final List<AbstractPageFragment> FRAGMENTS=new ArrayList<AbstractPageFragment>();
+
+	private List<AbstractPageFragment> FRAGMENTS = null;
 
 	public AbstractFragmentPager(FragmentManager fm) {
 		super(fm);
-
+		if(fm.getFragments()!=null){
+			fm.getFragments().clear();
+		}
+		FRAGMENTS = new ArrayList<AbstractPageFragment>();
 		FRAGMENTS.clear();
-	}
-	
-	
 
-	public static List<AbstractPageFragment> getFragments() {
+	}
+
+	public List<AbstractPageFragment> getFragments() {
 		return FRAGMENTS;
 	}
-
-
 
 	@Override
 	public CharSequence getPageTitle(int position) {
@@ -34,6 +35,7 @@ public abstract class AbstractFragmentPager extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
+		Log.i("item count", FRAGMENTS.size()+"");
 		return FRAGMENTS.size();
 	}
 

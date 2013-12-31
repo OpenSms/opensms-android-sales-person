@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentManager;
 public class SalesPersonsFragmentPager extends AbstractFragmentPager {
 
 	public SalesPersonsFragmentPager(FragmentManager fm) {
-		super(fm);
-		
+		super(fm);		
 		getFragments().add(new ToDoListCtrl());
 		getFragments().add(new PreOrderCtrl());
+		
 	}
 
 	
