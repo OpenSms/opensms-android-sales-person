@@ -1,15 +1,20 @@
 package org.opensms.android.activity;
 
+import java.util.concurrent.ExecutionException;
+
 import org.opensms.android.AbstractMainActivity;
 import org.opensms.android.R;
 import org.opensms.android.fragment.FragmentAccess;
 import org.opensms.android.fragment.ViewHolder;
+import org.opensms.db.TodoListController;
+import org.opensms.db.entity.TripData;
 import org.opensms.util.TemplateProvider;
 
 import android.app.SearchManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
@@ -23,6 +28,7 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
+import com.activeandroid.util.Log;
 
 public class OpenSmsActivity extends AbstractMainActivity implements
 		SearchView.OnQueryTextListener, FragmentAccess,
@@ -35,16 +41,15 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 	public OpenSmsActivity() {
 		super();
 		// ViewHolder.getViewHolder().setAccess(this);
-		
-		
+
 	}
 
 	Handler handler = new Handler();
 	private SearchView searchItemView;
 	private MenuItem miSearch;
+	private static final String tag = OpenSmsActivity.class.getName();
 
 	public void updateView(final String text) {
-		
 
 	}
 
@@ -52,11 +57,23 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ViewHolder.getViewHolder().setAccess(this);
+
+		TodoListController todoListController = new TodoListController(this);
+		AsyncTask<String, Void, TripData> tripData = todoListController.execute("86");
 		
-		TemplateProvider provider=new TemplateProvider();
-		provider.connect(getString(R.string.server_url));
-		
-		
+		 	
+		try {
+			tripData.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Log.i(tag, tripData+"");
+
 	}
 
 	@Override
@@ -70,7 +87,8 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		// Create the search view
-		searchItemView = new SearchView(getSupportActionBar().getThemedContext());
+		searchItemView = new SearchView(getSupportActionBar()
+				.getThemedContext());
 		searchItemView.setQueryHint("Item or customer…");
 		searchItemView.setOnQueryTextListener(this);
 		searchItemView.setOnSuggestionListener(this);
@@ -145,7 +163,5 @@ public class OpenSmsActivity extends AbstractMainActivity implements
 			tv.setText(cursor.getString(textIndex));
 		}
 	}
-
-	
 
 }

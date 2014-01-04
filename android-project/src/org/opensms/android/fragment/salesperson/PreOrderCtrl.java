@@ -1,16 +1,10 @@
 package org.opensms.android.fragment.salesperson;
 
-import org.opensms.android.AbstractMainActivity;
 import org.opensms.android.R;
 import org.opensms.android.fragment.AbstractPageFragment;
-import org.opensms.android.fragment.FragmentAccess;
-import org.opensms.android.fragment.ViewHolder;
 import org.opensms.android.fragment.salesperson.view.SelectItemDialog;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -15,8 +15,20 @@
     <string name="localhost_8080">baseurl</string>
 
     <!-- Server urls -->
-    <string name="server_url">http://192.168.1.2:8080</string>
+    <string name="server_url">http://192.168.1.6:8080</string>
     <string name="server_customer_add">customer/add</string>
     <string name="server_todo_list">todo/list</string>
+    <string name="first_name">First Name</string>
+    <string name="customer_register_title">Register Customer</string>
+    <string name="customer_register_etemail">Email</string>
+    <string name="customer_register_etcontact_number">Contact Number</string>
+    <string name="customer_register_etuser_name">User name</string>
+    <string name="btsave">Save</string>
+    <string name="btclear">Clear</string>
+    <string name="nic_number">Nic Number</string>
+    <string name="street_address">Street Address</string>
+    <string name="city">City</string>
+    <string name="province">Province</string>
+    <string name="postalcode">PostalCode</string>
 
 </resources>
