@@ -1,5 +1,6 @@
 package org.opensms.android.fragment.adapter;
 
+import org.opensms.android.fragment.salesperson.GsrOrderCtrl;
 import org.opensms.android.fragment.salesperson.PreOrderCtrl;
 import org.opensms.android.fragment.salesperson.ToDoListCtrl;
 
@@ -11,6 +12,7 @@ public class SalesPersonsFragmentPager extends AbstractFragmentPager {
 		super(fm);		
 		getFragments().add(new ToDoListCtrl());
 		getFragments().add(new PreOrderCtrl());
+		getFragments().add(new GsrOrderCtrl());
 		
 	}
 

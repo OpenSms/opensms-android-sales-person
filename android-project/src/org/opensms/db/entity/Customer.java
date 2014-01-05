@@ -75,4 +75,14 @@ public class Customer {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+	@Override
+	public String toString() {
+		return "Customer [user_id=" + user_id + ", username=" + username
+				+ ", nicNumber=" + nicNumber + ", contactNumber="
+				+ contactNumber + ", email=" + email + ", firstName="
+				+ firstName + ", location=" + location + "]";
+	}
+    
+    
 }

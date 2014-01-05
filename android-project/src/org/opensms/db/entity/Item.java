@@ -1,51 +1,38 @@
 package org.opensms.db.entity;
 
 public class Item {
-
+	
 	private String itemId;
-	private String name;
-	private Profit defaultProfit;
-	private Unit unit;
-	private Category category;
-
+	private String itemName;
+	private String unit;
+	private double price;
+	
 	public String getItemId() {
 		return itemId;
 	}
-
 	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
-
-	public String getName() {
-		return name;
+	public String getItemName() {
+		return itemName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
-
-	public Profit getDefaultProfit() {
-		return defaultProfit;
-	}
-
-	public void setDefaultProfit(Profit defaultProfit) {
-		this.defaultProfit = defaultProfit;
-	}
-
-	public Unit getUnit() {
+	public String getUnit() {
 		return unit;
 	}
-
-	public void setUnit(Unit unit) {
+	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-
-	public Category getCategory() {
-		return category;
+	public double getPrice() {
+		return price;
 	}
-
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setPrice(double price) {
+		this.price = price;
 	}
+	
+	
 
+	
 }

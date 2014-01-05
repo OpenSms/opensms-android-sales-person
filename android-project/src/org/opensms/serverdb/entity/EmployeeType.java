@@ -1,0 +1,93 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.opensms.serverdb.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * @author dewmal
+ */
+public class EmployeeType implements Serializable {
+    private static final long serialVersionUID = 1L;
+   
+  protected EmployeeTypePK employeeTypePK;
+   
+ private Date resignDate;
+   
+  private Type type1;
+   
+  private Employee employee;
+
+    public EmployeeType() {
+    }
+
+    public EmployeeType(EmployeeTypePK employeeTypePK) {
+        this.employeeTypePK = employeeTypePK;
+    }
+
+    public EmployeeType(int user, int type, Date assignDate) {
+        this.employeeTypePK = new EmployeeTypePK(user, type, assignDate);
+    }
+
+    public EmployeeTypePK getEmployeeTypePK() {
+        return employeeTypePK;
+    }
+
+    public void setEmployeeTypePK(EmployeeTypePK employeeTypePK) {
+        this.employeeTypePK = employeeTypePK;
+    }
+
+    public Date getResignDate() {
+        return resignDate;
+    }
+
+    public void setResignDate(Date resignDate) {
+        this.resignDate = resignDate;
+    }
+
+    public Type getType1() {
+        return type1;
+    }
+
+    public void setType1(Type type1) {
+        this.type1 = type1;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (employeeTypePK != null ? employeeTypePK.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof EmployeeType)) {
+            return false;
+        }
+        EmployeeType other = (EmployeeType) object;
+        if ((this.employeeTypePK == null && other.employeeTypePK != null) || (this.employeeTypePK != null && !this.employeeTypePK.equals(other.employeeTypePK))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "org.opensms.app.db.entity.EmployeeType[ employeeTypePK=" + employeeTypePK + " ]";
+    }
+
+}
